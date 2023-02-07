@@ -18,7 +18,7 @@ try {
                 'message' => 'Product list Succesful',
                 'res' => $results,
             ];
-            header("HTTP/1.0 405 Product list Succesful");
+            // header("HTTP/1.0 405 Product list Succesful");
             return json_encode($data);
         } else {
             $data = [
