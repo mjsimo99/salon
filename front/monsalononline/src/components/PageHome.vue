@@ -1,8 +1,8 @@
 <template>
 
-    <div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url('https://images.unsplash.com/photo-1499123785106-343e69e68db1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1748&q=80')">
+    <div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat bg-cover bg-center bg-no-repeat" style="background-image:url('https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1611&q=80')">
       
-        <div class="flex flex-col items-center p-6">
+        <div class="flex flex-col items-center p-6 text-white">
   <h1 class="text-2xl font-bold mb-6">Book Your Appointment</h1>
   <form class="w-full max-w-sm">
     <div class="mb-4">

@@ -5,7 +5,7 @@ function getProductList()
 {
 global $conn;
 try {
-    $stmt = $conn->prepare("SELECT * FROM product");
+    $stmt = $conn->prepare("SELECT date , time FROM appointment");
     $stmt->execute();
     $num_rows = $stmt->rowCount();
     // $results = $stmt->fetchAll();
@@ -46,10 +46,10 @@ try {
 function addProduct($product) {
     global $conn;
     try {
-        $stmt = $conn->prepare("INSERT INTO product (name, email, ref) VALUES (:name, :email, :ref)");
-        $stmt->bindParam(':name', $product['name']);
-        $stmt->bindParam(':email', $product['email']);
-        $stmt->bindParam(':ref', $product['ref']);
+        $stmt = $conn->prepare("INSERT INTO appointment (client_id,date,time) VALUES (:client_id, :date, :time)");
+        $stmt->bindParam(':client_id', $product['client_id']);
+        $stmt->bindParam(':date', $product['date']);
+        $stmt->bindParam(':time', $product['time']);
         $stmt->execute();
         $num_rows = $stmt->rowCount();
         if ($num_rows > 0) {
@@ -74,41 +74,41 @@ function addProduct($product) {
 }
 
 
-function deleteProduct($id) {
+function deleteProduct($id_app) {
     global $conn;
     try {
-        $stmt = $conn->prepare("DELETE FROM product WHERE id = :id");
-        $stmt->bindParam(':id', $id);
+        $stmt = $conn->prepare("DELETE FROM appointment WHERE id_app=:id_app");
+        $stmt->bindParam(':id_app', $id_app);
         $stmt->execute();
         $num_rows = $stmt->rowCount();
         if ($num_rows > 0) {
             $data = [
                 'status' => 200,
                 'message' => 'Product deleted successfully',
-                'id' => $id
+                'id' => $id_app
             ];
-            header("HTTP/1.0 200 Product deleted successfully");
+            header("HTTP/1.0 200 appointments deleted successfully");
             return json_encode($data);
         } else {
             $data = [
                 'status' => 404,
-                'message' => 'Product not found'
+                'message' => 'appointments not found'
             ];
-            header("HTTP/1.0 404 Product not found");
+            header("HTTP/1.0 404 appointments not found");
             return json_encode($data);
         }
     } catch (PDOException $e) {
         die("Query Failed: " . $e->getMessage());
     }
 }
-function updateProduct($id, $product) {
+function updateProduct($id_app, $product) {
     global $conn;
     try {
-        $stmt = $conn->prepare("UPDATE product SET name=:name, email=:email, ref=:ref WHERE id=:id");
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':name', $product['name']);
-        $stmt->bindParam(':email', $product['email']);
-        $stmt->bindParam(':ref', $product['ref']);
+        $stmt = $conn->prepare("UPDATE appointment SET client_id=:client_id, date=:date, time=:time WHERE id_app=:id_app");
+        $stmt->bindParam(':id_app', $id_app);
+        $stmt->bindParam(':client_id', $product['client_id']);
+        $stmt->bindParam(':date', $product['date']);
+        $stmt->bindParam(':time', $product['time']);
         $stmt->execute();
         $num_rows = $stmt->rowCount();
         if ($num_rows > 0) {
