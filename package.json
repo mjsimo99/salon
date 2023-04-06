@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "sweetalert": "^2.1.2",
+    "vue-toastification": "^1.7.14"
+  }
+}

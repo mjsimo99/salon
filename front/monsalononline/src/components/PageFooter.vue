@@ -9,7 +9,7 @@
         <a href="#"><i class="fa fa-pinterest"></i></a>
         <a href="#"><i class="fa fa-behance"></i></a>	
       </div>
-      <p>
+      <p class="text-black">
         ©copyright. designed and developed by <a href="#" class="mj">majidi</a>
       </p>
     </div>
@@ -23,7 +23,7 @@
   </div>
   
     </footer> -->
-x
+*
 </template>
 
 <script>
@@ -35,9 +35,11 @@ export default {
 <style>
 .footer {
     color: white;
-    background: #f8f9fd;
+    background: white;
     display: flex;
     align-items: center;
-    height: 154px;
+    justify-content: center;
+    height: 90px;
+    
 }
 </style>

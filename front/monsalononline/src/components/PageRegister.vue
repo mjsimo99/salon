@@ -9,22 +9,22 @@
             <h1 class="mb-2 text-2xl">Register</h1>
             <span class="text-gray-300">Enter Register Details</span>
           </div>
-          <form action="#">
+          <form  @submit.prevent="addClient">
            
     
             
             <div class="mb-4 text-lg">
-          <input class="rounded-3xl border-none bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="name" placeholder="username" />
+          <input class="rounded-3xl text-black border-none bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" id="first_name" v-model="client.first_name">
         </div>
 
         <div class="mb-4 text-lg">
-          <input class="rounded-3xl border-none bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="Password" name="name" placeholder="id@email.com" />
+          <input class="rounded-3xl text-black border-none bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" id="last_name" v-model="client.last_name" />
         </div>
         <div class="mb-4 text-lg">
-          <input class="rounded-3xl border-none bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="Password" name="name" placeholder="*********" />
+          <input class="rounded-3xl text-black border-none bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" id="phone" v-model="client.phone"/>
         </div>
         <div class="mt-8 flex justify-center text-lg text-black">
-          <button type="submit" class="rounded-3xl bg-green-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-green-600">Login</button>
+          <button type="submit" class="rounded-3xl bg-green-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-green-600">register</button>
         </div>
           </form>
         </div>
@@ -33,16 +33,57 @@
     
     
     </template>
+
     
-    <script>
-    export default {
-        name: "PageRegister"
+<script>
+export default {
+  data() {
+    return {
+      client: {
+        first_name: '',
+        last_name: '',
+        phone: '',
+      },
     };
-    </script>
+  },
+  methods: {
+    addClient() {
+      // your AJAX call to register the client goes here
+      fetch('http://localhost/salon/back/old/routes/web.php', {
+        method: 'POST',
+        body: JSON.stringify(this.client),
+
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Failed to register client');
+          }
+        })
+        .then(data => {
+          alert('Client registered successfully. Reference: ' + data.reference); // show the generated reference in an alert
+          this.client = {
+            first_name: '',
+            last_name: '',
+            phone: '',
+          };
+        })
+        .catch(error => {
+          alert('Failed to register client due to: ' + error.message);
+        });
+    },
+  },
+};
+</script>
+
+
+
+<style>.bg-black-semi-transparent {
+  background-color: rgba(0, 0, 0, 0.5);
+}</style>
     
-    <style>
-    .bg-black-semi-transparent {
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-    </style>
+
+
+
     
